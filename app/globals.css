@@ -2,26 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+.react-resizable-handle {
+    display: block;
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+
+.react-resizable-handle-s {
+    width: 100%;
+    height: 10px;
+    cursor: row-resize;
+    background-color: aqua;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.react-resizable-handle-e {
+    margin-right: 100px;
+    background-color: aqua;
+    width: 10px;
+    height: 100%;
+    cursor: col-resize;
 }
+
+.react-resizable-handle-n {
+    margin-top: -250%;
+    width: 100%;
+    height: 10px;
+    cursor: row-resize;
+    background-color: green;
+}
+
+.react-resizable-handle-w {
+    width: 10px;
+    height: 100%;
+    cursor: col-resize;
+    background-color: aqua;
+}
+
+
+
