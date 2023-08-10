@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 
-function useDragger(id: string): void {
+function useDragger(id: string, draggerId: string) {
 
   const isClicked = useRef<boolean>(false);
 
@@ -23,10 +23,11 @@ function useDragger(id: string): void {
     const target = document.getElementById(id);
     if (!target) throw new Error("Element with given id doesn't exist");
 
+    const dragger = document.getElementById(draggerId);
+    if (!dragger) throw new Error("Drager element not found");
+
     const container = target.parentElement;
     if (!container) throw new Error("target element must have a parent");
-
-
 
     const onMouseDown = (e: MouseEvent) => {
       isClicked.current = true;
@@ -50,14 +51,14 @@ function useDragger(id: string): void {
       target.style.left = `${nextX}px`;
     }
 
-    target.addEventListener('mousedown', onMouseDown);
-    target.addEventListener('mouseup', onMouseUp);
+    dragger.addEventListener('mousedown', onMouseDown);
+    dragger.addEventListener('mouseup', onMouseUp);
     container.addEventListener('mousemove', onMouseMove);
     container.addEventListener('mouseleave', onMouseUp);
 
     const cleanup = () => {
-      target.removeEventListener('mousedown', onMouseDown);
-      target.removeEventListener('mouseup', onMouseUp);
+      dragger.removeEventListener('mousedown', onMouseDown);
+      dragger.removeEventListener('mouseup', onMouseUp);
       container.removeEventListener('mousemove', onMouseMove);
       container.removeEventListener('mouseleave', onMouseUp);
     }
@@ -68,4 +69,3 @@ function useDragger(id: string): void {
 }
 
 export default useDragger;
-

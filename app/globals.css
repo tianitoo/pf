@@ -3,43 +3,4 @@
 @tailwind utilities;
 
 
-.react-resizable-handle {
-    display: block;
-    background-color: #eee;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-
-.react-resizable-handle-s {
-    width: 100%;
-    height: 10px;
-    cursor: row-resize;
-    background-color: aqua;
-}
-
-.react-resizable-handle-e {
-    margin-right: 100px;
-    background-color: aqua;
-    width: 10px;
-    height: 100%;
-    cursor: col-resize;
-}
-
-.react-resizable-handle-n {
-    margin-top: -250%;
-    width: 100%;
-    height: 10px;
-    cursor: row-resize;
-    background-color: green;
-}
-
-.react-resizable-handle-w {
-    width: 10px;
-    height: 100%;
-    cursor: col-resize;
-    background-color: aqua;
-}
-
-
 
