@@ -4,8 +4,9 @@ import React, { useEffect, useRef } from "react";
 
 function useDragger(id: string, draggerId: string) {
 
+  
   const isClicked = useRef<boolean>(false);
-
+  
   const coords = useRef<{
     startX: number,
     startY: number,
@@ -17,17 +18,26 @@ function useDragger(id: string, draggerId: string) {
     lastX: 0,
     lastY: 0
   })
-
+  
   useEffect(() => {
 
-    const target = document.getElementById(id);
-    if (!target) throw new Error("Element with given id doesn't exist");
-
-    const dragger = document.getElementById(draggerId);
-    if (!dragger) throw new Error("Drager element not found");
-
-    const container = target.parentElement;
-    if (!container) throw new Error("target element must have a parent");
+    // get screen height and width
+      const screenHeight = window.innerHeight;
+      const screenWidth = window.innerWidth;
+    
+      
+      const target = document.getElementById(id);
+      if (!target) throw new Error("Element with given id doesn't exist");
+      
+      const dragger = document.getElementById(draggerId);
+      if (!dragger) throw new Error("Drager element not found");
+      
+      const container = target.parentElement;
+      if (!container) throw new Error("target element must have a parent");
+      
+      // get element height and width
+      const elementHeight = target.offsetHeight;
+      const elementWidth = target.offsetWidth;
 
     const onMouseDown = (e: MouseEvent) => {
       isClicked.current = true;
@@ -43,12 +53,15 @@ function useDragger(id: string, draggerId: string) {
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isClicked.current) return;
-
-      const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+      
+      if (e.clientX - coords.current.startX + coords.current.lastX > 0 && e.clientX - coords.current.startX + coords.current.lastX < screenWidth - elementWidth) {
+        const nextX = e.clientX - coords.current.startX + coords.current.lastX;
+        target.style.left = `${nextX}px`;
+      }
+      if (e.clientY - coords.current.startY + coords.current.lastY > 0 && e.clientY - coords.current.startY + coords.current.lastY < screenHeight - elementHeight - 81) {
       const nextY = e.clientY - coords.current.startY + coords.current.lastY;
-
       target.style.top = `${nextY}px`;
-      target.style.left = `${nextX}px`;
+    }
     }
 
     dragger.addEventListener('mousedown', onMouseDown);
